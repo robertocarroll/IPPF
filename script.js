@@ -173,15 +173,32 @@ var map = L.mapbox.map('map', 'robertocarroll.ippf', {
 });
 
 // Add a marker layer
+var LeafIcon = L.Icon.extend({
+                options: {
+                    shadowUrl: 'images/shadow.png',
+                    shadowRetinaUrl: 'images/shadow@2x.png',
+                    iconSize:     [32, 43],
+                    shadowSize:   [32, 43],
+                    iconAnchor:   [22, 42],
+                    shadowAnchor: [22, 42]
+                }
+            });
+     
+     var s;
+     var customIcon;
+
+// Add a marker layer
 var mainMarkers = L.mapbox.markerLayer();
 
 // Customise the marker layer
 mainMarkers.on('layeradd', function(e) {
     var marker = e.layer,feature = marker.feature;
      
-    marker.setIcon(L.mapbox.marker.icon({
-    'marker-color': '#000'
-    }));
+    // this is to get the correct marker icon depending on the type 
+    s = feature.properties.type;
+    customIcon = new LeafIcon({iconUrl: 'images/'+s+'-off.png',iconRetinaUrl: 'images/'+s+'@2x-off.png'});
+
+    marker.setIcon(customIcon);
 
 });
  
