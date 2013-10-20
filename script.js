@@ -240,8 +240,34 @@ function onZoomend()
 
 
 
+// Listen for individual marker clicks
+mainMarkers.on('click',function (e) {
+
+  e.layer.unbindPopup();
+
+  var details = e.layer.feature;
+                
+  var info = '<img class="header" src="images/' +s +'.png" alt="Type of win: ' + s +'">' +
+              '<h1>' + details.properties.country + '</h1>' +
+             '<p class="bold">' + details.properties.title + '</p>' +
+             '<p>' + details.properties.description + '</p>';
+
+         
+        document.getElementById('info').innerHTML = info;
 
 
+
+  // Centre the map around the clicked marker  
+    map.panTo(e.layer.getLatLng());
+
+});
+
+
+    // Clear the tooltip when map is clicked
+    map.on('click',function(e){
+        document.getElementById('info').innerHTML = '<p>Intro text. This is where we will put the explanations.</p>';
+       
+    });
 
 
 
