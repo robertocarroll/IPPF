@@ -228,6 +228,7 @@ function onZoomend()
     {
       map.addLayer(clusterMarkers);
       map.removeLayer(mainMarkers);
+      document.getElementById('info').innerHTML = introText;
     }
 
   // As you zoom in, remove the cluster layer and add the marker layer
