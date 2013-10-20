@@ -252,8 +252,17 @@ mainMarkers.on('click',function (e) {
              '<p class="bold">' + details.properties.title + '</p>' +
              '<p>' + details.properties.description + '</p>';
 
-         
+ 
+
+   if($("html").hasClass("ie8")) {
+        
         document.getElementById('info').innerHTML = info;
+    }
+
+    else {
+    
+      $('#info').hide().html(info).fadeIn('slow');
+    }        
 
 
 
