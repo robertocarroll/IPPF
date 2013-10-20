@@ -186,6 +186,7 @@ var LeafIcon = L.Icon.extend({
      
      var s;
      var customIcon;
+     var introText = $("<div />").append($("#info").clone()).html();
 
 // Add a marker layer
 var mainMarkers = L.mapbox.markerLayer();
@@ -253,18 +254,10 @@ mainMarkers.on('click',function (e) {
              '<p>' + details.properties.description + '</p>';
 
  
+ // Centre the map around the clicked marker 
+   if($("html").hasClass("ie8")) {document.getElementById('info').innerHTML = info;}
 
-   if($("html").hasClass("ie8")) {
-        
-        document.getElementById('info').innerHTML = info;
-    }
-
-    else {
-    
-      $('#info').hide().html(info).fadeIn('slow');
-    }        
-
-
+    else {$('#info').hide().html(info).fadeIn('slow');}
 
   // Centre the map around the clicked marker  
     map.panTo(e.layer.getLatLng());
@@ -274,8 +267,8 @@ mainMarkers.on('click',function (e) {
 
     // Clear the tooltip when map is clicked
     map.on('click',function(e){
-        document.getElementById('info').innerHTML = '<p>Intro text. This is where we will put the explanations.</p>';
-       
+       document.getElementById('info').innerHTML = introText;
+
     });
 
 
