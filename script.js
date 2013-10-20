@@ -150,11 +150,32 @@ var geoJsonData = [{
 ];
 
 
+// Load the map 
+var map = L.mapbox.map('map', 'robertocarroll.ippf', {
 
-var map = L.mapbox.map('map', 'robertocarroll.ippf');
+    center: [25, -15],
+    zoom: 2,
+    minZoom: 2,
+    maxZoom: 5,
+    maxBounds: [[-85, -180.0],[85, 180.0]],
 
+    gridLayer: {},
+    // This line redefines part of the underlying code which
+    // sanitizes HTML from MapBox Hosting. The original code is there
+    // for the protection of sites, so that malicious map-creators
+    // can't add cross-site scripting attacks to sites that use their
+    // maps.
+    // Turning it off allows any content to be available in tooltips.
+    // It's recommended to only with trusted maps.
+    gridControl: {
+        sanitizer: function (x) { return x; }
+    }
+});
+
+// Add a marker layer
 var mainMarkers = L.mapbox.markerLayer();
 
+// Customise the marker layer
 mainMarkers.on('layeradd', function(e) {
     var marker = e.layer,feature = marker.feature;
      
@@ -164,37 +185,39 @@ mainMarkers.on('layeradd', function(e) {
 
 });
  
- mainMarkers.setGeoJSON(geoJsonData);
+// set the lat/lon for marker layer
+mainMarkers.setGeoJSON(geoJsonData);
 
+// Create a cluster marker layer
+var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:70});
 
+// Set the lat/lon for the cluster layer 
+var geoJsonLayer = L.geoJson(geoJsonData);
 
+// Add the lat/lon to the layer
+clusterMarkers.addLayer(geoJsonLayer);
 
-  var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:70});
+// Add the layer to the map for the initial view
+map.addLayer(clusterMarkers);
 
-    var geoJsonLayer = L.geoJson(geoJsonData);
-    clusterMarkers.addLayer(geoJsonLayer);
+// Control which layers show at which zoom level
+map.on('zoomend', onZoomend);
 
-
-
- map.on('zoomend', onZoomend);
-
- function onZoomend(){
-   if(map.getZoom()>2)
-
-  {
-    map.addLayer(mainMarkers);
-    map.removeLayer(clusterMarkers);
-
-  }
- 
-    if(map.getZoom()<=2)
+function onZoomend()
+{
+  // As you zoom out, remove the marker layer and add the cluster layer 
+  if(map.getZoom()<=2)
     {
-      
       map.addLayer(clusterMarkers);
       map.removeLayer(mainMarkers);
-    
     }
 
+  // As you zoom in, remove the cluster layer and add the marker layer
+  if(map.getZoom()>2)
+    {
+      map.addLayer(mainMarkers);
+      map.removeLayer(clusterMarkers);
+    }
 }
 
 
