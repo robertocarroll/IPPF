@@ -39,7 +39,7 @@ var geoJsonData = [{
         "country": "Seychelles ",
         "title": "Reviewing the national impact of service access",
         "description": "A monitoring and evaluation framework was developed for the new national strategic plan for access to sexual and reproductive health services.",
-        "type": "srh"
+        "type": "access"
       },
       "geometry": {
         "type": "Point",
@@ -55,7 +55,7 @@ var geoJsonData = [{
         "country": "Uganda ",
         "title": "Removing taxes on contraceptives",
         "description": "The Member Association successfully advocated to the Ministry of Finance, the Ministry of Health, key MPs  and the Uganda Revenue Authority to remove the 18 % Value Added Tax and 6 % withholding tax being levied on reproductive health commodities, such as Contraceptives and Mama Kits.",
-        "type": "srh"
+        "type": "access"
       },
       "geometry": {
         "type": "Point",
@@ -87,7 +87,7 @@ var geoJsonData = [{
         "country": "Uganda ",
         "title": "National Youth Employment Policy integrates sexual and reproductive health education with business training.",
         "description": "The Member Association successfully advocated for the inclusion of sexual and reproductive health rights into the National Business and Entrepreneurial Manual.  All recipients of the National Youth Fund are required under the National Youth Employment Policy to undergo Business and Entrepreneurship training. The Member Association provided the sexual and reproductive health content for the manual and conducted the final review.",
-        "type": "srh"
+        "type": "access"
       },
       "geometry": {
         "type": "Point",
@@ -103,7 +103,7 @@ var geoJsonData = [{
         "country": "Congo, Dem. Republic ",
         "title": "Sexual and reproductive health a national issue",
         "description": "The Member Association and UNFPA successfully advocated to the Ministry of Health for sexual and reproductive health to be allocated in the national budget.",
-        "type": "srh"
+        "type": "access"
       },
       "geometry": {
         "type": "Point",
@@ -240,8 +240,6 @@ function onZoomend()
 }
 
 
-
-
 // Listen for individual marker clicks
 mainMarkers.on('click',function (e) {
 
@@ -249,7 +247,7 @@ mainMarkers.on('click',function (e) {
 
   var details = e.layer.feature;
                 
-  var info = '<img class="header" src="images/' +s +'.png" alt="Type of win: ' + s +'">' +
+  var info = '<img class="header" src="images/' + details.properties.type +'.png" alt="Type of win: ' + details.properties.type +'">' +
               '<h1>' + details.properties.country + '</h1>' +
              '<p class="bold">' + details.properties.title + '</p>' +
              '<p>' + details.properties.description + '</p>';
