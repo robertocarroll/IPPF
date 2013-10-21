@@ -174,6 +174,8 @@ var map = L.mapbox.map('map', 'robertocarroll.ippf', {
 
 googledocs('0Am6KRhllvF5JdDlpQk00OUZvR3F4eERtZEJ6NWhZWXc', 'od6', function(features) {
 
+  console.log(features.toSource());
+
 // Add a marker layer
 var LeafIcon = L.Icon.extend({
                 options: {
