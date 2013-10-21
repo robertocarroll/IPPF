@@ -172,6 +172,8 @@ var map = L.mapbox.map('map', 'robertocarroll.ippf', {
     }
 });
 
+googledocs('0Am6KRhllvF5JdDlpQk00OUZvR3F4eERtZEJ6NWhZWXc', 'od6', function(features) {
+
 // Add a marker layer
 var LeafIcon = L.Icon.extend({
                 options: {
@@ -204,13 +206,13 @@ mainMarkers.on('layeradd', function(e) {
 });
  
 // set the lat/lon for marker layer
-mainMarkers.setGeoJSON(geoJsonData);
+mainMarkers.setGeoJSON(features);
 
 // Create a cluster marker layer
 var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:70});
 
 // Set the lat/lon for the cluster layer 
-var geoJsonLayer = L.geoJson(geoJsonData);
+var geoJsonLayer = L.geoJson(features);
 
 // Add the lat/lon to the layer
 clusterMarkers.addLayer(geoJsonLayer);
@@ -238,6 +240,7 @@ function onZoomend()
       map.removeLayer(clusterMarkers);
     }
 }
+
 
 
 // Listen for individual marker clicks
@@ -269,6 +272,6 @@ map.on('click',function(e){
    document.getElementById('info').innerHTML = introText;
 });
 
-
+}); // Close Google Docs
 
 
