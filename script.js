@@ -240,6 +240,13 @@ function onZoomend()
 }
 
 
+// When you click on a cluster it zooms to bounds
+clusterMarkers.on('clusterclick', function (a) {
+    a.layer.zoomToBounds();
+});
+
+
+
 // Listen for individual marker clicks
 mainMarkers.on('click',function (e) {
 
