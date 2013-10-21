@@ -264,11 +264,10 @@ mainMarkers.on('click',function (e) {
 });
 
 
-    // Clear the tooltip when map is clicked
-    map.on('click',function(e){
-       document.getElementById('info').innerHTML = introText;
-
-    });
+// Clear the tooltip when map is clicked
+map.on('click',function(e){
+   document.getElementById('info').innerHTML = introText;
+});
 
 
 
