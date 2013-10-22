@@ -88,7 +88,7 @@ input[type=checkbox].css-checkbox {
               display:none;
             }
 
-            input[type=checkbox].css-checkbox + label.srh, 
+            input[type=checkbox].css-checkbox + label.access, 
             input[type=checkbox].css-checkbox + label.education, 
             input[type=checkbox].css-checkbox + label.abortion,
             input[type=checkbox].css-checkbox + label.violence,
@@ -108,7 +108,7 @@ input[type=checkbox].css-checkbox {
 
             }
 
-            label.srh, label.education, label.abortion, label.violence,
+            label.access, label.education, label.abortion, label.violence,
             label.srhbudget, label.hiv, label.cervicalcancer, label.conception   
             {
               background-image:url(images/csscheckbox.png);
@@ -142,7 +142,7 @@ input[type=checkbox].css-checkbox {
               background-position: 0 -100px;
             }
 
-            input[type=checkbox].css-checkbox:checked + label.srh {
+            input[type=checkbox].css-checkbox:checked + label.access {
               background-position: 0 -120px;
             } 
             
