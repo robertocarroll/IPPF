@@ -304,5 +304,33 @@ var filters = document.getElementById('filters');
         change();
 
 
+    function onHoverOver(e) {
+
+        var marker = e.layer,feature = marker.feature;
+
+        // this is to get the correct marker icon depending on the type 
+        s = feature.properties.type;
+        customIcon = new LeafIcon({iconUrl: 'images/'+s+'-hover.png',iconRetinaUrl: 'images/'+s+'@2x-hover.png'});
+
+        marker.setIcon(customIcon);
+
+     }
+
+    mainMarkers.on('mouseover', onHoverOver);
+
+
+    function onHoverOut(e) {
+
+        var marker = e.layer,feature = marker.feature;
+
+        // this is to get the correct marker icon depending on the type 
+        s = feature.properties.type;
+        customIcon = new LeafIcon({iconUrl: 'images/'+s+'-off.png'});
+
+        marker.setIcon(customIcon);  
+
+    }
+                
+     mainMarkers.on('mouseout', onHoverOut);
 
 

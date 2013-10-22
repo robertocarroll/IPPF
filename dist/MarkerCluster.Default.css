@@ -1,8 +1,10 @@
 .marker-cluster-small {
-	background-color: #988c78;
+	
+
+
 	}
 .marker-cluster-small div {
-	background-color: #eeebe7;
+	
 	}
 
 .marker-cluster-medium {
@@ -20,20 +22,25 @@
 	}
 
 .marker-cluster {
-	background-clip: padding-box;
-	border-radius: 20px;
+
+
 	}
 .marker-cluster div {
-	
+
+	background-image: url("../images/cluster-circle.png"); 
 	width: 30px;
 	height: 30px;
-	margin-left: 5px;
-	margin-top: 5px;
 	text-align: center;
-	border-radius: 15px;
 	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
 	}
+
+	.marker-cluster div:hover {
+
+	background-image: url("../images/cluster-circle-hover.png"); 
+	color: white;
+}
+
 .marker-cluster span {
-	font-weight: 700;
+	font-weight: 400;
 	line-height: 30px;
 	}

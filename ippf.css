@@ -72,9 +72,15 @@ counter-reset:
 
 #options {line-height: 18px;}
 
+.filter-title {
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+
 ul#options {
   overflow:hidden;
-  width: 600px;
+  width: 618px;
 }
 
 #options li  { 
