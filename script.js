@@ -187,6 +187,7 @@ var LeafIcon = L.Icon.extend({
      var s;
      var customIcon;
      var introText = $("<div />").append($("#info").clone()).html();
+     $('#map-ui').hide();
 
 // Add a marker layer
 var mainMarkers = L.mapbox.markerLayer();
@@ -229,6 +230,7 @@ function onZoomend()
       map.addLayer(clusterMarkers);
       map.removeLayer(mainMarkers);
       document.getElementById('info').innerHTML = introText;
+      $('#map-ui').fadeOut('slow');
     }
 
   // As you zoom in, remove the cluster layer and add the marker layer
@@ -236,6 +238,7 @@ function onZoomend()
     {
       map.addLayer(mainMarkers);
       map.removeLayer(clusterMarkers);
+      $('#map-ui').fadeIn('slow');
     }
 }
 
