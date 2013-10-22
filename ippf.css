@@ -80,14 +80,13 @@ counter-reset:
 
 ul#options {
   overflow:hidden;
-  width: 618px;
+  width: 600px;
 }
 
 #options li  { 
   float:left;
   display:inline;
-  width:33%;
-  padding-bottom: 10px;
+  width:50%;
 } 
 
 input[type=checkbox].css-checkbox {
@@ -101,7 +100,9 @@ input[type=checkbox].css-checkbox {
             input[type=checkbox].css-checkbox + label.srhbudget,
             input[type=checkbox].css-checkbox + label.hiv,
             input[type=checkbox].css-checkbox + label.cervicalcancer,
-            input[type=checkbox].css-checkbox + label.conception {
+            input[type=checkbox].css-checkbox + label.conception,
+            input[type=checkbox].css-checkbox + label.knowledge,
+            input[type=checkbox].css-checkbox + label.global {
               padding-left:15px;
               height:10px; 
               display:inline-block;
@@ -115,7 +116,8 @@ input[type=checkbox].css-checkbox {
             }
 
             label.access, label.education, label.abortion, label.violence,
-            label.srhbudget, label.hiv, label.cervicalcancer, label.conception   
+            label.srhbudget, label.hiv, label.cervicalcancer, label.conception, 
+            label.knowledge, label.global     
             {
               background-image:url(images/csscheckbox.png);
               -webkit-touch-callout: none;
@@ -159,6 +161,15 @@ input[type=checkbox].css-checkbox {
             input[type=checkbox].css-checkbox:checked + label.violence {
               background-position: 0 -160px;
             }
+
+            input[type=checkbox].css-checkbox:checked + label.knowledge {
+              background-position: 0 -160px;
+            }
+
+            input[type=checkbox].css-checkbox:checked + label.global {
+              background-position: 0 -160px;
+            }
+            
             
 
             
