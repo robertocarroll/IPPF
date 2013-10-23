@@ -132,7 +132,7 @@ input[type=checkbox].css-checkbox {
               display:inline-block;
               line-height:12px;
               background-repeat:no-repeat;
-              background-position: 0 -20px;
+              background-position: 0 -40px;
               font-size:12px;
               vertical-align:middle;
               cursor:pointer;
@@ -159,31 +159,31 @@ input[type=checkbox].css-checkbox {
             }
 
             input[type=checkbox].css-checkbox:checked + label.cervicalcancer {
-              background-position: 0 -40px;
-            }
-
-            input[type=checkbox].css-checkbox:checked + label.conception {
               background-position: 0 -60px;
             }
 
-            input[type=checkbox].css-checkbox:checked + label.education {
+            input[type=checkbox].css-checkbox:checked + label.conception {
               background-position: 0 -80px;
             }
 
-            input[type=checkbox].css-checkbox:checked + label.hiv {
-              background-position: 0 -100px;
+            input[type=checkbox].css-checkbox:checked + label.education {
+              background-position: 0 -120px;
             }
 
-            input[type=checkbox].css-checkbox:checked + label.access {
-              background-position: 0 -120px;
-            } 
-            
-            input[type=checkbox].css-checkbox:checked + label.srhbudget {
+            input[type=checkbox].css-checkbox:checked + label.hiv {
               background-position: 0 -140px;
             }
 
+            input[type=checkbox].css-checkbox:checked + label.access {
+              background-position: 0 -180px;
+            } 
+            
+            input[type=checkbox].css-checkbox:checked + label.srhbudget {
+              background-position: 0 -200px;
+            }
+
             input[type=checkbox].css-checkbox:checked + label.violence {
-              background-position: 0 -160px;
+              background-position: 0 -220px;
             }
 
             input[type=checkbox].css-checkbox:checked + label.knowledge {
@@ -191,7 +191,7 @@ input[type=checkbox].css-checkbox {
             }
 
             input[type=checkbox].css-checkbox:checked + label.global {
-              background-position: 0 -160px;
+              background-position: 0 -20px;
             }
             
             
