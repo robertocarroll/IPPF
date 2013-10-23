@@ -3,8 +3,8 @@
 // Load the geojson data from a file
 
 var geoJsonData;
-$.getJSON('ippf.geojson', function(data) {
-    geoJsonData = data;
+//$.getJSON('ippf.geojson', function(data) {
+   //geoJsonData = data;
 
    
     
@@ -51,6 +51,10 @@ var LeafIcon = L.Icon.extend({
 // Add a marker layer
 var mainMarkers = L.mapbox.markerLayer();
 
+googledocs('0Am6KRhllvF5JdHgwUS1GNlFQVEs5NGZhVkFyYWVOVmc', 'od6', function(features) {
+
+  geoJsonData = features;
+
 // Customise the marker layer
 mainMarkers.on('layeradd', function(e) {
     var marker = e.layer,feature = marker.feature;
@@ -67,7 +71,7 @@ mainMarkers.on('layeradd', function(e) {
 mainMarkers.setGeoJSON(geoJsonData);
 
 // Create a cluster marker layer
-var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:70});
+var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:100});
 
 // Set the lat/lon for the cluster layer 
 var geoJsonLayer = L.geoJson(geoJsonData);
@@ -197,4 +201,5 @@ var filters = document.getElementById('filters');
                 
      mainMarkers.on('mouseout', onHoverOut);
 
- }); // close the loading of the geojson 
+ }); // close the loading of the google spreadsheet
+
