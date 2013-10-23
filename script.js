@@ -230,7 +230,7 @@ function onZoomend()
       map.addLayer(clusterMarkers);
       map.removeLayer(mainMarkers);
       document.getElementById('info').innerHTML = introText;
-      $('#map-ui').fadeOut('slow');
+      if (!$('html').hasClass('ie8')) {$('#map-ui').fadeOut('slow');}
     }
 
   // As you zoom in, remove the cluster layer and add the marker layer
@@ -238,7 +238,7 @@ function onZoomend()
     {
       map.addLayer(mainMarkers);
       map.removeLayer(clusterMarkers);
-      $('#map-ui').fadeIn('slow');
+      if (!$('html').hasClass('ie8')) {$('#map-ui').fadeIn('slow');}
     }
 }
 
@@ -283,7 +283,7 @@ map.on('click',function(e){
  // Show and hide the icons depending on the checkboxes
 
 var filters = document.getElementById('filters');
- var checkboxes = document.querySelectorAll('.filter');
+ var checkboxes = $('.filter');
 
         function change() {
             // Find all checkboxes that are checked and build a list of their values
@@ -296,7 +296,8 @@ var filters = document.getElementById('filters');
             mainMarkers.setFilter(function (features) {
                 // check each marker's symbol to see if its value is in the list
                 // of symbols that should be on, stored in the 'on' array
-                return on.indexOf(features.properties['type']) !== -1;
+
+              return on.indexOf(features.properties['type']) !== -1;
             });
             return false;
         }
