@@ -4,6 +4,10 @@ body {
   line-height: 24px;
 }
 
+html, body {
+  overflow: hidden;
+}
+
 #map { position:absolute; top:0; bottom:0; right:300px; left:0; }
 
 .header {
