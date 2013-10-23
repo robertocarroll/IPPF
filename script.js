@@ -263,7 +263,7 @@ mainMarkers.on('click',function (e) {
              '<p>' + details.properties.description + '</p>';
 
  
- // Centre the map around the clicked marker 
+ // Load the text for that marker in the info panel
    if($("html").hasClass("ie8")) {document.getElementById('info').innerHTML = info;}
 
     else {$('#info').hide().html(info).fadeIn('slow');}
@@ -330,7 +330,7 @@ var filters = document.getElementById('filters');
         s = feature.properties.type;
         customIcon = new LeafIcon({iconUrl: 'images/'+s+'-off.png'});
 
-        marker.setIcon(customIcon);  
+        marker.setIcon(customIcon); 
 
     }
                 
