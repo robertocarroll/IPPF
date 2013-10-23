@@ -55,6 +55,22 @@ counter-reset:
   { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 
+a.read-more {
+  padding-top: 10px;
+  font-weight: 700;
+  color: #219375;
+  text-decoration: none;
+  border-bottom: 2px solid #219375;
+}
+
+a.read-more:hover {
+  color: red;
+  text-decoration: none;
+  border-bottom: 2px solid #219375;
+}
+
+a.read-more:visited { }
+
 #mapui {
   display: none;
 }

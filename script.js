@@ -3,8 +3,8 @@
 // Load the geojson data from a file
 
 var geoJsonData;
-//$.getJSON('ippf.geojson', function(data) {
-   //geoJsonData = data;
+$.getJSON('ippf.geojson', function(data) {
+   geoJsonData = data;
 
    
     
@@ -51,9 +51,9 @@ var LeafIcon = L.Icon.extend({
 // Add a marker layer
 var mainMarkers = L.mapbox.markerLayer();
 
-googledocs('0Am6KRhllvF5JdHgwUS1GNlFQVEs5NGZhVkFyYWVOVmc', 'od6', function(features) {
+//googledocs('0Am6KRhllvF5JdG01U2I3VjB1UmgtcXdXbVR5VWRPaFE', 'od6', function(features) {
 
-  geoJsonData = features;
+  //geoJsonData = features;
 
 // Customise the marker layer
 mainMarkers.on('layeradd', function(e) {
@@ -146,6 +146,8 @@ map.on('click',function(e){
 
  // Show and hide the icons depending on the checkboxes
 
+ if (!$('html').hasClass('ie8')) {
+
 var filters = document.getElementById('filters');
  var checkboxes = $('.filter');
 
@@ -170,7 +172,7 @@ var filters = document.getElementById('filters');
         filters.onchange = change;
     // Initially filter the markers
         change();
-
+}
 
     function onHoverOver(e) {
 
@@ -201,5 +203,5 @@ var filters = document.getElementById('filters');
                 
      mainMarkers.on('mouseout', onHoverOut);
 
- }); // close the loading of the google spreadsheet
+ }); // close the loading of the google spreadsheet/geojsondata
 
