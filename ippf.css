@@ -63,12 +63,12 @@ a.read-more {
 }
 
 a.read-more:hover {
-  color: red;
+  color: #635C45;
   text-decoration: none;
-  border-bottom: 2px solid #219375;
+  border-bottom: 2px solid #635C45;
 }
 
-a.read-more:visited { }
+
 
 #mapui {
   display: none;
