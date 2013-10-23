@@ -67,7 +67,7 @@ mainMarkers.on('layeradd', function(e) {
 mainMarkers.setGeoJSON(geoJsonData);
 
 // Create a cluster marker layer
-var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:70});
+var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:115});
 
 // Set the lat/lon for the cluster layer 
 var geoJsonLayer = L.geoJson(geoJsonData);
