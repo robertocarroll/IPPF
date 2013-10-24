@@ -167,7 +167,7 @@ input[type=checkbox].css-checkbox {
             }
 
             input[type=checkbox].css-checkbox:checked + label.education {
-              background-position: 0 -120px;
+              background-position: 0 -100px;
             }
 
             input[type=checkbox].css-checkbox:checked + label.hiv {
