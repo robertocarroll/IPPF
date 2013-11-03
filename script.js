@@ -1,7 +1,31 @@
 
 
-// Load the geojson data from a file
+var geoJsonTop = [{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-75.00, 30]
+    },
+    "properties": {
+        "title": "Small kitten",
+        "number": "12"
+    }
+}, {
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-34.00, 40]
+    },
+    "properties": {
+        "title": "Big kitten",
+        "number": "2"
+    }
+}];
 
+
+
+
+// Load the geojson data from a file
 var geoJsonData;
 $.getJSON('ippf.geojson', function(data) {
     geoJsonData = data;
@@ -48,6 +72,43 @@ var LeafIcon = L.Icon.extend({
      var introText = $("<div />").append($("#info").clone()).html();
      $('#map-ui').hide();
 
+L.NumberedDivIcon = L.Icon.extend({
+options: {
+// EDIT THIS TO POINT TO THE FILE AT http://www.charliecroom.com/marker_hole.png (or your own marker)
+iconUrl: 'images/cluster-circle.png',
+number: '',
+shadowUrl: null,
+iconSize: new L.Point(25, 41),
+iconAnchor: new L.Point(13, 41),
+popupAnchor: new L.Point(0, -33),
+/*
+iconAnchor: (Point)
+popupAnchor: (Point)
+*/
+className: 'leaflet-div-icon'
+},
+ 
+createIcon: function () {
+var div = document.createElement('div');
+var img = this._createImg(this.options['iconUrl']);
+var numdiv = document.createElement('div');
+numdiv.setAttribute ( "class", "number" );
+numdiv.innerHTML = this.options['number'] || '';
+div.appendChild ( img );
+div.appendChild ( numdiv );
+this._setIconStyles(div, 'icon');
+return div;
+},
+ 
+//you could change this to add a shadow like in the normal marker if you really wanted
+createShadow: function () {
+return null;
+}
+});
+
+
+
+
 // Add a marker layer
 var mainMarkers = L.mapbox.markerLayer();
 
@@ -67,16 +128,33 @@ mainMarkers.on('layeradd', function(e) {
 mainMarkers.setGeoJSON(geoJsonData);
 
 // Create a cluster marker layer
-var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:115});
+//var clusterMarkers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, maxClusterRadius:115});
+
+var topMarkers = L.mapbox.markerLayer();
+
+
+topMarkers.on('layeradd', function(e) {
+    var marker = e.layer,feature = marker.feature;
+    var howMany = feature.properties.number;
+
+     numberIcon = new L.NumberedDivIcon({number: howMany});
+
+ marker.setIcon(numberIcon);
+
+});   
+
 
 // Set the lat/lon for the cluster layer 
 var geoJsonLayer = L.geoJson(geoJsonData);
 
 // Add the lat/lon to the layer
-clusterMarkers.addLayer(geoJsonLayer);
+//clusterMarkers.addLayer(geoJsonLayer);
+topMarkers.setGeoJSON(geoJsonTop);
 
 // Add the layer to the map for the initial view
-map.addLayer(clusterMarkers);
+//map.addLayer(clusterMarkers);
+
+map.addLayer(topMarkers);
 
 // Control which layers show at which zoom level
 map.on('zoomend', onZoomend);
@@ -86,7 +164,7 @@ function onZoomend()
   // As you zoom out, remove the marker layer and add the cluster layer 
   if(map.getZoom()<=2)
     {
-      map.addLayer(clusterMarkers);
+   //   map.addLayer(clusterMarkers);
       map.removeLayer(mainMarkers);
       document.getElementById('info').innerHTML = introText;
       if (!$('html').hasClass('ie8')) {$('#map-ui').fadeOut('slow');}
@@ -96,7 +174,7 @@ function onZoomend()
   if(map.getZoom()>2)
     {
       map.addLayer(mainMarkers);
-      map.removeLayer(clusterMarkers);
+     // map.removeLayer(clusterMarkers);
       // Only show the filter if it is not ie8
       if (!$('html').hasClass('ie8')) {$('#map-ui').fadeIn('slow');}
     }
@@ -104,9 +182,9 @@ function onZoomend()
 
 
 // When you click on a cluster it zooms to bounds
-clusterMarkers.on('clusterclick', function (a) {
-    a.layer.zoomToBounds();
-});
+//clusterMarkers.on('clusterclick', function (a) {
+  //  a.layer.zoomToBounds();
+// });
 
 
 
