@@ -1,28 +1,77 @@
 
+// Load the geojson data for the higher level
 
-var geoJsonTop = [{
+var geoJsonTop = [
+{
     "type": "Feature",
     "geometry": {
         "type": "Point",
-        "coordinates": [-75.00, 30]
+        "coordinates": [36.821946, -1.292066]
     },
     "properties": {
-        "title": "Small kitten",
+        "title": "Africa",
         "number": "12"
     }
-}, {
+},
+{
     "type": "Feature",
     "geometry": {
         "type": "Point",
-        "coordinates": [-34.00, 40]
+        "coordinates": [10.165960, 36.818810]
     },
     "properties": {
-        "title": "Big kitten",
+        "title": "Arab World",
         "number": "2"
     }
-}];
+},
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [101.686855, 3.139003]
+    },
+    "properties": {
+        "title": "East and South East Asia and Oceania",
+        "number": "22"
+    }
+},
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [77.224960, 28.635308]
+    },
+    "properties": {
+        "title": "South Asia",
+        "number": "24"
+    }
+},
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [4.351710, 50.850340]
+    },
+    "properties": {
+        "title": "European Network",
+        "number": "54"
+    }
+},
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-74.005973, 40.714353]
+    },
+    "properties": {
+        "title": "Western Hemisphere",
+        "number": "54"
+    }
+}
 
+];
 
+ 
 
 
 // Load the geojson data from a file
@@ -30,9 +79,7 @@ var geoJsonData;
 $.getJSON('ippf.geojson', function(data) {
     geoJsonData = data;
 
-   
-    
-
+     
 // Load the map 
 var map = L.mapbox.map('map', 'ippf.ippf', {
 
@@ -73,40 +120,32 @@ var LeafIcon = L.Icon.extend({
      $('#map-ui').hide();
 
 L.NumberedDivIcon = L.Icon.extend({
-options: {
-// EDIT THIS TO POINT TO THE FILE AT http://www.charliecroom.com/marker_hole.png (or your own marker)
-iconUrl: 'images/cluster-circle.png',
-number: '',
-shadowUrl: null,
-iconSize: new L.Point(25, 41),
-iconAnchor: new L.Point(13, 41),
-popupAnchor: new L.Point(0, -33),
-/*
-iconAnchor: (Point)
-popupAnchor: (Point)
-*/
-className: 'leaflet-div-icon'
-},
- 
-createIcon: function () {
-var div = document.createElement('div');
-var img = this._createImg(this.options['iconUrl']);
-var numdiv = document.createElement('div');
-numdiv.setAttribute ( "class", "number" );
-numdiv.innerHTML = this.options['number'] || '';
-div.appendChild ( img );
-div.appendChild ( numdiv );
-this._setIconStyles(div, 'icon');
-return div;
-},
- 
-//you could change this to add a shadow like in the normal marker if you really wanted
-createShadow: function () {
-return null;
-}
+      options: {
+      iconUrl: 'images/cluster-circle.png',
+      number: '',
+      shadowUrl: null,
+      iconSize: new L.Point(30, 30),
+      iconAnchor: new L.Point(15, 15),
+      className: 'ippf-div-icon'
+    },
+     
+    createIcon: function () {
+      var div = document.createElement('div');
+      var img = this._createImg(this.options['iconUrl']);
+      var numdiv = document.createElement('div');
+      numdiv.setAttribute ( "class", "number" );
+      numdiv.innerHTML = this.options['number'] || '';
+      div.appendChild ( img );
+      div.appendChild ( numdiv );
+      this._setIconStyles(div, 'icon');
+      return div;
+    },
+     
+    //you could change this to add a shadow like in the normal marker if you really wanted
+      createShadow: function () {
+      return null;
+    }
 });
-
-
 
 
 // Add a marker layer
@@ -143,17 +182,13 @@ topMarkers.on('layeradd', function(e) {
 
 });   
 
-
 // Set the lat/lon for the cluster layer 
 var geoJsonLayer = L.geoJson(geoJsonData);
 
 // Add the lat/lon to the layer
-//clusterMarkers.addLayer(geoJsonLayer);
 topMarkers.setGeoJSON(geoJsonTop);
 
 // Add the layer to the map for the initial view
-//map.addLayer(clusterMarkers);
-
 map.addLayer(topMarkers);
 
 // Control which layers show at which zoom level
@@ -164,28 +199,32 @@ function onZoomend()
   // As you zoom out, remove the marker layer and add the cluster layer 
   if(map.getZoom()<=2)
     {
-   //   map.addLayer(clusterMarkers);
+      map.addLayer(topMarkers);
       map.removeLayer(mainMarkers);
       document.getElementById('info').innerHTML = introText;
       if (!$('html').hasClass('ie8')) {$('#map-ui').fadeOut('slow');}
+
+        // Hover for the top markers   
+
+        $('.ippf-div-icon').bind('mouseover', function() {    
+          $(this).find('img').attr("src","images/cluster-circle-hover.png");
+        });
+
+        $('.ippf-div-icon').bind('mouseout', function() {
+          $(this).find('img').attr("src","images/cluster-circle.png");
+        });
+
     }
 
   // As you zoom in, remove the cluster layer and add the marker layer
   if(map.getZoom()>2)
     {
       map.addLayer(mainMarkers);
-     // map.removeLayer(clusterMarkers);
+      map.removeLayer(topMarkers);
       // Only show the filter if it is not ie8
       if (!$('html').hasClass('ie8')) {$('#map-ui').fadeIn('slow');}
     }
 }
-
-
-// When you click on a cluster it zooms to bounds
-//clusterMarkers.on('clusterclick', function (a) {
-  //  a.layer.zoomToBounds();
-// });
-
 
 
 // Listen for individual marker clicks
@@ -218,6 +257,12 @@ map.on('click',function(e){
 });
 
 
+// Zoom to the level with lots of markers on click on higher numbered markers
+topMarkers.on('click',function (e) {
+  map.setView(e.latlng, map.getZoom() + 3);
+});
+
+
  // Show and hide the icons depending on the checkboxes
 
 var filters = document.getElementById('filters');
@@ -246,6 +291,7 @@ var filters = document.getElementById('filters');
         change();
 
 
+   // Hover for the main markers     
     function onHoverOver(e) {
 
         var marker = e.layer,feature = marker.feature;
@@ -275,4 +321,19 @@ var filters = document.getElementById('filters');
                 
      mainMarkers.on('mouseout', onHoverOut);
 
+  // Hover for the top markers   
+
+  $('.ippf-div-icon').bind('mouseover', function() {    
+    $(this).find('img').attr("src","images/cluster-circle-hover.png");
+  });
+
+  $('.ippf-div-icon').bind('mouseout', function() {
+    $(this).find('img').attr("src","images/cluster-circle.png");
+  });
+
+
+
  }); // close the loading of the geojson 
+
+
+ 

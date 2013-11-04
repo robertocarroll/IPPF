@@ -73,6 +73,27 @@ a.read-more:hover {
 }
 
 
+.ippf-div-icon {
+  background: transparent;
+  border: none;
+}
+
+ 
+.leaflet-marker-icon .number{
+  position: relative;
+  top: -30px;
+  font-size: 12px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  color: #005395;
+}
+
+
+.leaflet-marker-icon .number:hover {
+  color: white;
+}
+
 
 #mapui {
   display: none;
