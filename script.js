@@ -230,6 +230,14 @@ function onZoomend()
 // Listen for individual marker clicks
 mainMarkers.on('click',function (e) {
 
+  var marker = e.layer,feature = marker.feature;
+     
+    // this is to get the correct marker icon depending on the type 
+    s = feature.properties.type;
+    customIcon = new LeafIcon({iconUrl: 'images/'+s+'-hover.png',iconRetinaUrl: 'images/'+s+'@2x-hover.png'});
+
+    marker.setIcon(customIcon);
+
   e.layer.unbindPopup();
 
   var details = e.layer.feature;
@@ -290,7 +298,6 @@ var filters = document.getElementById('filters');
     // Initially filter the markers
         change();
 
-
    // Hover for the main markers     
     function onHoverOver(e) {
 
@@ -320,6 +327,8 @@ var filters = document.getElementById('filters');
     }
                 
      mainMarkers.on('mouseout', onHoverOut);
+
+
 
   // Hover for the top markers   
 
